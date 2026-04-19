@@ -3,10 +3,9 @@ import sys
 import time
 import pandas as pd
 from contextlib import contextmanager
-from tqdm import tqdm
 
 # Import required modules from the CollectedCode package
-from DetectorCode import (
+from daphniadetectv2.DetectorCode import (
      NMS_detect_Rezoom, SegmentYOLODeploy, YOLODeploy, 
     DataDict, ScaleDetect, LengthMeasure, ConvertToJPG, SaveData, SpinaBaseRefine
 )

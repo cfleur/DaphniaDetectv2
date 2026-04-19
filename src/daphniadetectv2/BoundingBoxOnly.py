@@ -1,13 +1,13 @@
 import os
 import sys
 import time
-import pandas as pd
 from contextlib import contextmanager
-from tqdm import tqdm
 
-from DetectorCode import (
-    NMS_detect_Rezoom, SegmentYOLODeploy, YOLODeploy, 
-    DataDict, ScaleDetect, LengthMeasure, ConvertToJPG, SaveData, SpinaBaseRefine
+from daphniadetectv2.DetectorCode import (
+    NMS_detect_Rezoom,
+    ConvertToJPG,
+    SaveData,
+    SpinaBaseRefine
 )
 
 @contextmanager
@@ -33,10 +33,7 @@ def main():
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
     bbox_model = os.path.join(script_dir, "Model/detect/weights/best.pt")
-    segment_model = os.path.join(script_dir, "Model/segment/daphnia_body/weights/NonObjectSeg.pt")
-    classify_model = os.path.join(script_dir, "Model/classify/weights/best.pt")
     spina_model = os.path.join(script_dir, "Model/segment/spina_base/weights/SpinaBase.pt")
-    classify_species_flag = True
 
     # 1. Resolve Directories
     image_dir = input("Enter ImageDir path: ").strip()
