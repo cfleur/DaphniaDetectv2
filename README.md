@@ -27,5 +27,5 @@ Alternatively, install the project into your project.
 For example, as an editable install from a local folder with pdm:
 ```
 cd your-project
-pdm add "daphniadetectv2 @ git+http://github.com/cfleur/DaphniaDetectv2.git@main#egg=daphniadetectv2"
+pdm add "daphniadetectv2 @ git+http://github.com/Fipsii/DaphniaDetectv2.git@main#egg=daphniadetectv2"
 ```
