@@ -28,7 +28,11 @@ def log_step(step_num, total_steps, description):
 def log_done():
     print("[Complete]")
 
-def main():
+def main(
+        organs: list[str] = ["Heart", "Daphnia", "Eye", "Spina tip", "Spina base"],
+        image_dir: None | str = None,
+        output_dir: None | str = None
+):
     start_time = time.time()
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -36,13 +40,15 @@ def main():
     spina_model = os.path.join(script_dir, "Model/segment/spina_base/weights/SpinaBase.pt")
 
     # 1. Resolve Directories
-    image_dir = input("Enter ImageDir path: ").strip()
-    while not os.path.exists(image_dir):
-        image_dir = input("Invalid. Enter ImageDir path: ").strip()
+    if image_dir is None:
+        image_dir = input("Enter ImageDir path: ").strip()
+        while not os.path.exists(image_dir):
+            image_dir = input("Invalid. Enter ImageDir path: ").strip()
     image_dir = os.path.normpath(image_dir)
 
-    custom_output = input("Enter OutputDir (or Enter for default): ").strip()
-    output_dir = custom_output if custom_output else f"{image_dir}_Results"
+    if output_dir is None:
+        custom_output = input("Enter OutputDir (or Enter for default): ").strip()
+        output_dir = custom_output if custom_output else f"{image_dir}_Results"
     os.makedirs(output_dir, exist_ok=True)
 
     print("\n" + "="*50)
@@ -66,7 +72,7 @@ def main():
         _, confidence_data = NMS_detect_Rezoom.DetectOrgans(
             image_dir, output_dir, 
             vis=True, NMS=True, refineTip=False,
-            organs=["Heart", "Daphnia", "Eye", "Spina tip", "Spina base"], 
+            organs=organs,
             ModelPath=bbox_model, SpinaModelPath=bbox_model, use_sahi=False
         )
     labels_dir = os.path.join(output_dir, "Detection", "labels")
