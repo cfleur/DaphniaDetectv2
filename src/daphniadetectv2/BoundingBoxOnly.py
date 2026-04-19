@@ -29,7 +29,7 @@ def log_done():
     print("[Complete]")
 
 def main(
-        organs: list[str] = ["Heart", "Daphnia", "Eye", "Spina tip", "Spina base"],
+        organs: None | list[str] = None,
         image_dir: None | str = None,
         output_dir: None | str = None
 ):
@@ -68,6 +68,8 @@ def main(
 
     # STEP 2: DETECT ORGANS
     log_step(2, TOTAL_STEPS, "Detecting Organs...")
+    if organs is None:
+        organs = ["Heart", "Daphnia", "Eye", "Spina tip", "Spina base"]
     with suppress_stdout():
         _, confidence_data = NMS_detect_Rezoom.DetectOrgans(
             image_dir, output_dir, 
