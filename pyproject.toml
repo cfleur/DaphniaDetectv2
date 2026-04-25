@@ -1,6 +1,6 @@
 [project]
 name = "daphniadetectv2"
-version = "0.1.0"
+version = "2.1.0"
 description = "A pipeline for scientific analysis of animals of the genus Daphnia with YOLO."
 authors = [
     {name = "", email = ""},
